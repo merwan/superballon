@@ -13,10 +13,11 @@ $(document).ready(function() {
         };
     }
     
-    var cibles = Array();
-    cibles.push(new Cible('#f00', 80, 350, 200));
-    cibles.push(new Cible('#0f0', 80, 405, 100));
-    cibles.push(new Cible('#e4e', 100, 200, 100));
+    var cibles = [
+        new Cible('#f00', 80, 350, 200),
+        new Cible('#0f0', 80, 405, 100),
+        new Cible('#e4e', 100, 200, 100)
+    ];
 
     dessinerCanevas(ctx);
 
@@ -34,7 +35,7 @@ $(document).ready(function() {
             var cible1 = cibles[cible];
             if (cible1.contient(sourisX, sourisY)) {
                 alert("Bravo !");
-                cibles.pop(cible1);
+                cibles.splice(cible, 1);
                 dessinerCanevas(ctx);
                 return;
             }
