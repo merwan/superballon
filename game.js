@@ -12,26 +12,26 @@ $(document).ready(function() {
     }
 
     function World(canevas, cibles) {
-        this.canvas = $(canevas);
-        this.ctx = canevas.getContext("2d");
-        this.cibles = cibles;
+        var canvas = $(canevas);
+        var ctx = canevas.getContext("2d");
 
-        this.dessinerCanevas = function() {
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            for (cible in this.cibles) {
-                var cibleCourante = this.cibles[cible];
-                this.dessinerCible(cibleCourante);
+        var dessinerCanevas = function() {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            console.log(cibles);
+            for (cible in cibles) {
+                var cibleCourante = cibles[cible];
+                dessinerCible(cibleCourante);
             }
         };
-        this.dessinerCible = function(cible) {
-            this.ctx.fillStyle = cible.couleur;
-            this.ctx.fillRect(cible.positionX, cible.positionY, cible.largeur, cible.hauteur);
+        var dessinerCible = function(cible) {
+            ctx.fillStyle = cible.couleur;
+            ctx.fillRect(cible.positionX, cible.positionY, cible.largeur, cible.hauteur);
         }
-        this.run = function() {
-            this.dessinerCanevas();
+        var run = function() {
+            dessinerCanevas();
         }
 
-        this.canvas.mousedown(function(evenement) {
+        canvas.mousedown(function(evenement) {
             var sourisX,
                 sourisY;
             
@@ -43,7 +43,7 @@ $(document).ready(function() {
 
             for (cible in cibles) {
                 var cible1 = cibles[cible];
-                alert("posY:" + cible1.positionY + " sourisY:" + sourisY);
+                //alert("posY:" + cible1.positionY + " sourisY:" + sourisY);
                 if (cible1.contient(sourisX, sourisY)) {
                     alert("Bravo !");
                     cibles.splice(cible, 1);
@@ -54,6 +54,10 @@ $(document).ready(function() {
             }
             alert("Perdu hahaha ! Recommencez.");
         });
+
+        return {
+          run: run
+        };
     }
 
     var canevas = document.getElementById("drawing");
