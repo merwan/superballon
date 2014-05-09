@@ -15,19 +15,18 @@ $(document).ready(function() {
         var canvas = $(canevas);
         var ctx = canevas.getContext("2d");
 
-        var dessinerCanevas = function() {
+        function dessinerCanevas() {
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-            console.log(cibles);
             for (cible in cibles) {
                 var cibleCourante = cibles[cible];
                 dessinerCible(cibleCourante);
             }
         };
-        var dessinerCible = function(cible) {
+        function dessinerCible(cible) {
             ctx.fillStyle = cible.couleur;
             ctx.fillRect(cible.positionX, cible.positionY, cible.largeur, cible.hauteur);
         }
-        var run = function() {
+        function run() {
             dessinerCanevas();
         }
 
@@ -43,11 +42,9 @@ $(document).ready(function() {
 
             for (cible in cibles) {
                 var cible1 = cibles[cible];
-                //alert("posY:" + cible1.positionY + " sourisY:" + sourisY);
                 if (cible1.contient(sourisX, sourisY)) {
                     alert("Bravo !");
                     cibles.splice(cible, 1);
-                    // TODO: comment appeler la méthode de World?
                     dessinerCanevas();
                     return;
                 }
